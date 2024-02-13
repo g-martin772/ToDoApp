@@ -12,4 +12,12 @@
       <ProjectReference Include="..\ToDoAppLib\ToDoAppLib.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="FontAwesome.Sharp" Version="6.3.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Views\" />
+    </ItemGroup>
+
 </Project>

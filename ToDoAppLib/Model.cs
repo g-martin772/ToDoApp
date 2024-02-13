@@ -8,6 +8,7 @@ public class User
     public int Id { get; set; }
 
     [Length(2, 50)]
+    [StringLength(50)]
     public string Name { get; set; } = "User";
 }
 
@@ -17,9 +18,11 @@ public class Category
     public int Id { get; set; }
 
     [Length(2, 50)]
+    [StringLength(50)]
     public string Name { get; set; } = "Category";
 
     [Length(7, 7)]
+    [StringLength(7)]
     public string ColorHex { get; set; } = "#000000";
 }
 
@@ -29,6 +32,7 @@ public class ToDo
     public int Id { get; set; }
 
     [Length(2, 50)]
+    [StringLength(50)]
     public string Name { get; set; } = "Todo";
 
     public DateTime Created { get; set; } = DateTime.Now;

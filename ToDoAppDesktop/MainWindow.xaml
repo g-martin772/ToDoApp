@@ -4,9 +4,134 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ToDoAppDesktop"
+        xmlns:viewModels="clr-namespace:Portfolio.ViewModels"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="800"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
+    <Window.DataContext>
+        <viewModels:MainViewModel/>
+    </Window.DataContext>
 
-    </Grid>
+    <Border CornerRadius="10" BorderThickness="1">
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="{StaticResource winBorderColor1}" Offset="0"/>
+                <GradientStop Color="{StaticResource winBorderColor2}" Offset="0.4"/>
+                <GradientStop Color="{StaticResource winBorderColor3}" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border CornerRadius="10 0 0 10" Grid.Column="0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
+                        <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
+                        <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Height="35" Margin="15 25 0 40">
+                        <Image Source="Images/resume.png" Height="30"/>
+                        <TextBlock Text="Portfolio" Foreground="{StaticResource titleColor2}"
+                                   FontFamily="Montserrat" FontWeight="Medium" Margin="10 0 0 0"
+                                   VerticalAlignment="Center" FontSize="20"/>
+                    </StackPanel>
+
+                    <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource color1}" Command="{Binding ShowHomeViewCommand}" IsChecked="True">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Home" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource color2}" Command="{Binding ShowMyEducationViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="SchoolFlag" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="My Education" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource color3}" Command="{Binding ShowMyProjectsViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="ProjectDiagram" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="My Projects" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource color4}" Command="{Binding ShowMySkillsViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Tools" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="My Skills" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+                </StackPanel>
+            </Border>
+
+            <Border CornerRadius="0 10 10 0" Grid.Column="1">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
+                        <GradientStop Color="{StaticResource primaryBackColor1}" Offset="0"/>
+                        <GradientStop Color="{StaticResource primaryBackColor2}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel x:Name="pnlControlBar" Grid.Row="0" Orientation="Horizontal" Margin=" 0 0 5 0"
+                            FlowDirection="RightToLeft" Background="Transparent"
+                            MouseLeftButtonDown="OnPnlControlBarMouseLeftButtonDown"
+                            MouseEnter="OnPnlControlBarMouseEnter">
+
+                        <Button x:Name="btnClose" Style="{StaticResource controlBarButton}" Click="OnBtnCloseClick">
+                                <fa:IconImage Icon="Close" Style="{StaticResource controlBarButtonIcon}"/>
+                        </Button>
+                        <Button x:Name="btnMaximize" Style="{StaticResource controlBarButton}" Click="OnBtnMaximizeClick">
+                                <fa:IconImage Icon="WindowMaximize" Style="{StaticResource controlBarButtonIcon}"/>
+                        </Button>
+                        <Button x:Name="btnMinimize" Style="{StaticResource controlBarButton}" Click="OnBtnMinimizeClick">
+                                <fa:IconImage Icon="WindowMinimize" Style="{StaticResource controlBarButtonIcon}"/>
+                        </Button>
+                    </StackPanel>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                            <fa:IconImage Icon="{Binding Icon}" Height="20" Width="20" Margin="35 0 10 0"
+                                          Foreground="{StaticResource titleColor2}"/>
+                            <TextBlock Text="{Binding Caption, Mode=Default}" FontSize="16" VerticalAlignment="Center" FontFamily="Montserrat"
+                                       Foreground="{StaticResource titleColor2}" FontWeight="Medium"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" FlowDirection="RightToLeft"
+                                VerticalAlignment="Center" Margin="0 0 10 0">
+                            <Button Style="{StaticResource controlBarButton}">
+                                    <fa:IconImage Icon="AngleDown" Style="{StaticResource controlBarButtonIcon}"/>
+                            </Button>
+                            <TextBlock Text="Some Options go here maybe"></TextBlock>
+                        </StackPanel>
+                    </Grid>
+
+                    <ContentControl Grid.Row="2" Content="{Binding CurrentChildView}" Margin="25"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
 </Window>
